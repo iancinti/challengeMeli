@@ -1,7 +1,7 @@
-package com.iancinti.challengeMeli.adapter.out;
+package com.iancinti.challengeMeli.coupon.adapter.out;
 
-import com.iancinti.challengeMeli.adapter.out.model.ItemRestResponse;
-import com.iancinti.challengeMeli.application.port.out.RedeemCouponRepository;
+import com.iancinti.challengeMeli.coupon.adapter.out.model.ItemRestResponse;
+import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

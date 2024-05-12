@@ -1,4 +1,4 @@
-package com.iancinti.challengeMeli.adapter.out.model;
+package com.iancinti.challengeMeli.coupon.adapter.out.model;
 
 public class ItemRestResponse {
     private String id;

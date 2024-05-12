@@ -1,8 +1,8 @@
-package com.iancinti.challengeMeli.adapter.in;
+package com.iancinti.challengeMeli.coupon.adapter.in;
 
-import com.iancinti.challengeMeli.application.port.in.RedeemCouponCommand;
-import com.iancinti.challengeMeli.domain.CouponRequest;
-import com.iancinti.challengeMeli.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.application.port.in.RedeemCouponCommand;
+import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
+import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

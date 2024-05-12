@@ -1,8 +1,9 @@
 package com.iancinti.challengeMeli.adapter.in;
 
-import com.iancinti.challengeMeli.application.port.in.RedeemCouponCommand;
-import com.iancinti.challengeMeli.domain.CouponRequest;
-import com.iancinti.challengeMeli.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.application.port.in.RedeemCouponCommand;
+import com.iancinti.challengeMeli.coupon.adapter.in.CouponController;
+import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
+import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

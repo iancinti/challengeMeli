@@ -1,10 +1,11 @@
 package com.iancinti.challengeMeli.application.usecase;
 
-import com.iancinti.challengeMeli.adapter.out.model.ItemRestResponse;
-import com.iancinti.challengeMeli.application.port.out.RedeemCouponRepository;
-import com.iancinti.challengeMeli.application.port.usecase.RedeemCouponUseCase;
-import com.iancinti.challengeMeli.domain.CouponRequest;
-import com.iancinti.challengeMeli.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.adapter.out.model.ItemRestResponse;
+import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
+import com.iancinti.challengeMeli.coupon.application.usecase.RedeemCouponUseCase;
+import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
+import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.genetic.GeneticService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -21,12 +22,15 @@ class RedeemCouponUseCaseTest {
     @Mock
     private RedeemCouponRepository redeemCouponRepository;
 
+    @Mock
+    private GeneticService geneticService;
+
     private RedeemCouponUseCase redeemCouponUseCase;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        redeemCouponUseCase = new RedeemCouponUseCase(redeemCouponRepository);
+        redeemCouponUseCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService);
     }
 
     @Test
@@ -54,7 +58,7 @@ class RedeemCouponUseCaseTest {
     void testExecute_EmptyItems() {
 
         MockitoAnnotations.openMocks(this);
-        RedeemCouponUseCase useCase = new RedeemCouponUseCase(redeemCouponRepository);
+        RedeemCouponUseCase useCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService);
         CouponRequest request = new CouponRequest(Collections.emptyList(), 100);
 
         Mono<CouponResponse> resultMono = useCase.execute(request);

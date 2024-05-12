@@ -1,4 +1,4 @@
-package com.iancinti.challengeMeli.domain;
+package com.iancinti.challengeMeli.coupon.domain;
 
 import java.util.List;
 
