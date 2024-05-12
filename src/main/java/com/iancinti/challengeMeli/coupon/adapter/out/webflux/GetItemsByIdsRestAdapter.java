@@ -1,6 +1,6 @@
-package com.iancinti.challengeMeli.coupon.adapter.out;
+package com.iancinti.challengeMeli.coupon.adapter.out.webflux;
 
-import com.iancinti.challengeMeli.coupon.adapter.out.model.ItemRestResponse;
+import com.iancinti.challengeMeli.coupon.adapter.out.webflux.model.ItemRestResponse;
 import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.iancinti.challengeMeli.genetic;
 
-import com.iancinti.challengeMeli.coupon.adapter.out.model.ItemRestResponse;
+import com.iancinti.challengeMeli.coupon.adapter.out.webflux.model.ItemRestResponse;
 import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
 import com.iancinti.challengeMeli.genetic.model.Chromosome;
 import org.springframework.stereotype.Component;

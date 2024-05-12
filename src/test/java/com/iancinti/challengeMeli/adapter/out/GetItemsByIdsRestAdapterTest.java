@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
-import com.iancinti.challengeMeli.coupon.adapter.out.GetItemsByIdsRestAdapter;
-import com.iancinti.challengeMeli.coupon.adapter.out.model.ItemRestResponse;
+import com.iancinti.challengeMeli.coupon.adapter.out.webflux.GetItemsByIdsRestAdapter;
+import com.iancinti.challengeMeli.coupon.adapter.out.webflux.model.ItemRestResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

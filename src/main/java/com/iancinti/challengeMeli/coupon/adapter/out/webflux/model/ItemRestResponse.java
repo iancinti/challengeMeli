@@ -1,4 +1,4 @@
-package com.iancinti.challengeMeli.coupon.adapter.out.model;
+package com.iancinti.challengeMeli.coupon.adapter.out.webflux.model;
 
 public class ItemRestResponse {
     private String id;

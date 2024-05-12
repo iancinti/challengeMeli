@@ -1,7 +1,8 @@
 package com.iancinti.challengeMeli.application.usecase;
 
-import com.iancinti.challengeMeli.coupon.adapter.out.model.ItemRestResponse;
+import com.iancinti.challengeMeli.coupon.adapter.out.webflux.model.ItemRestResponse;
 import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
+import com.iancinti.challengeMeli.coupon.application.port.out.SaveItemRepository;
 import com.iancinti.challengeMeli.coupon.application.usecase.RedeemCouponUseCase;
 import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
 import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
@@ -25,12 +26,15 @@ class RedeemCouponUseCaseTest {
     @Mock
     private GeneticService geneticService;
 
+    @Mock
+    private SaveItemRepository saveItemRepository;
+
     private RedeemCouponUseCase redeemCouponUseCase;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        redeemCouponUseCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService);
+        redeemCouponUseCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService,saveItemRepository);
     }
 
     @Test
@@ -58,7 +62,7 @@ class RedeemCouponUseCaseTest {
     void testExecute_EmptyItems() {
 
         MockitoAnnotations.openMocks(this);
-        RedeemCouponUseCase useCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService);
+        RedeemCouponUseCase useCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService,saveItemRepository);
         CouponRequest request = new CouponRequest(Collections.emptyList(), 100);
 
         Mono<CouponResponse> resultMono = useCase.execute(request);
