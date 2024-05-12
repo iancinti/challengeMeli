@@ -2,8 +2,8 @@ package com.iancinti.challengeMeli.adapter.in;
 
 import com.iancinti.challengeMeli.coupon.application.port.in.RedeemCouponCommand;
 import com.iancinti.challengeMeli.coupon.adapter.in.CouponController;
-import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
-import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.domain.Coupon;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -35,14 +35,14 @@ class CouponControllerTest {
 
         List<String> items = Arrays.asList("item1", "item2", "item3");
         int amount = 100;
-        CouponRequest request = new CouponRequest(items, amount);
+        Coupon request = new Coupon(items, amount);
         List<String> responseItems = Arrays.asList("item1", "item3");
         double responseTotal = 50.0;
-        CouponResponse response = new CouponResponse(responseItems, responseTotal);
-        Mono<CouponResponse> responseMono = Mono.just(response);
+        VerifiedCoupon response = new VerifiedCoupon(responseItems, responseTotal);
+        Mono<VerifiedCoupon> responseMono = Mono.just(response);
         when(redeemCouponCommand.execute(request)).thenReturn(responseMono);
 
-        ResponseEntity<Mono<CouponResponse>> responseEntity = couponController.postCoupon(request);
+        ResponseEntity<Mono<VerifiedCoupon>> responseEntity = couponController.postCoupon(request);
 
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(responseMono, responseEntity.getBody());
@@ -52,11 +52,11 @@ class CouponControllerTest {
     @Test
     void testPostCoupon_EmptyItems() {
 
-        CouponRequest request = new CouponRequest(Collections.emptyList(), 100);
-        Mono<CouponResponse> responseMono = Mono.empty();
+        Coupon request = new Coupon(Collections.emptyList(), 100);
+        Mono<VerifiedCoupon> responseMono = Mono.empty();
         when(redeemCouponCommand.execute(request)).thenReturn(responseMono);
 
-        ResponseEntity<Mono<CouponResponse>> responseEntity = couponController.postCoupon(request);
+        ResponseEntity<Mono<VerifiedCoupon>> responseEntity = couponController.postCoupon(request);
 
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(responseMono, responseEntity.getBody());
@@ -67,11 +67,11 @@ class CouponControllerTest {
     void testPostCoupon_ZeroAmount() {
 
         List<String> items = Arrays.asList("item1", "item2", "item3");
-        CouponRequest request = new CouponRequest(Collections.singletonList(String.valueOf(items)), 0);
-        Mono<CouponResponse> responseMono = Mono.empty();
+        Coupon request = new Coupon(Collections.singletonList(String.valueOf(items)), 0);
+        Mono<VerifiedCoupon> responseMono = Mono.empty();
         when(redeemCouponCommand.execute(request)).thenReturn(responseMono);
 
-        ResponseEntity<Mono<CouponResponse>> responseEntity = couponController.postCoupon(request);
+        ResponseEntity<Mono<VerifiedCoupon>> responseEntity = couponController.postCoupon(request);
 
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(responseMono, responseEntity.getBody());

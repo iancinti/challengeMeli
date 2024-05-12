@@ -1,8 +1,8 @@
 package com.iancinti.challengeMeli.coupon.application.port.out;
 
-import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 
 public interface SaveItemRepository {
 
-    void execute(CouponResponse couponResponse);
+    void execute(VerifiedCoupon verifiedCoupon);
 }

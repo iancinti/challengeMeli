@@ -2,13 +2,16 @@ package com.iancinti.challengeMeli.coupon.domain;
 
 import java.util.List;
 
-public class CouponResponse {
+public class Coupon {
     private List<String> items;
-    private Double total;
+    private int amount;
 
-    public CouponResponse(List<String> items, Double total) {
+    public Coupon() {
+    }
+
+    public Coupon(List<String> items, int amount) {
         this.items = items;
-        this.total = total;
+        this.amount = amount;
     }
 
     public List<String> getItems() {
@@ -19,11 +22,11 @@ public class CouponResponse {
         this.items = items;
     }
 
-    public Double getTotal() {
-        return total;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

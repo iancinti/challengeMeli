@@ -1,13 +1,10 @@
 package com.iancinti.challengeMeli.coupon.application.usecase;
 
-import com.iancinti.challengeMeli.coupon.adapter.out.redis.model.ItemRedis;
 import com.iancinti.challengeMeli.coupon.application.port.in.GetRankingCouponQuery;
 import com.iancinti.challengeMeli.coupon.application.port.out.GetAllItemsRepository;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Comparator;
-import java.util.List;
 
 @Component
 public class GetRankingCouponUseCase implements GetRankingCouponQuery {
@@ -20,11 +17,7 @@ public class GetRankingCouponUseCase implements GetRankingCouponQuery {
     }
 
     @Override
-    public List<ItemRedis> execute() {
-        return getAllItemsRepository.execute()
-                .stream()
-                .sorted(Comparator.comparing(ItemRedis::getCount))
-                .limit(5)
-                .toList().reversed();
+    public VerifiedCoupon execute() {
+        return getAllItemsRepository.execute();
     }
 }

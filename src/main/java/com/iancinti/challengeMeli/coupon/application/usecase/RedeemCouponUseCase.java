@@ -3,8 +3,8 @@ package com.iancinti.challengeMeli.coupon.application.usecase;
 import com.iancinti.challengeMeli.coupon.application.port.in.RedeemCouponCommand;
 import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
 import com.iancinti.challengeMeli.coupon.application.port.out.SaveItemRepository;
-import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
-import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.domain.Coupon;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 import com.iancinti.challengeMeli.genetic.GeneticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,15 +29,15 @@ public class RedeemCouponUseCase implements RedeemCouponCommand {
     }
 
     @Override
-    public Mono<CouponResponse> execute(CouponRequest couponRequest) {
-        if (couponRequest.getItems().isEmpty()) {
-            return Mono.just(new CouponResponse(Collections.emptyList(), 0.0));
+    public Mono<VerifiedCoupon> execute(Coupon coupon) {
+        if (coupon.getItems().isEmpty()) {
+            return Mono.just(new VerifiedCoupon(Collections.emptyList(), 0.0));
         } else {
-            return Flux.fromIterable(couponRequest.getItems())
+            return Flux.fromIterable(coupon.getItems())
                     .flatMap(redeemCouponRepository::execute)
                     .collectList()
                     .flatMap(items ->
-                            geneticService.generate(50, 5, 0.05, items, items.size(), couponRequest.getAmount())
+                            geneticService.generate(50, 5, 0.05, items, items.size(), coupon.getAmount())
                                 .onErrorResume(Mono::error).doOnNext(saveItemRepository::execute));
         }
     }

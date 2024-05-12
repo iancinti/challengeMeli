@@ -1,7 +1,7 @@
 package com.iancinti.challengeMeli.genetic;
 
 import com.iancinti.challengeMeli.coupon.adapter.out.webflux.model.ItemRestResponse;
-import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 import com.iancinti.challengeMeli.genetic.model.Chromosome;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class GeneticService {
 
-    public Mono<CouponResponse> generate(
+    public Mono<VerifiedCoupon> generate(
             int populationSize,
             int generations,
             double mutationRate,
@@ -47,7 +47,7 @@ public class GeneticService {
                 .flatMap(c -> getMaxFitness(c, prices)));
     }
 
-    private Mono<CouponResponse> getMaxFitness(List<Chromosome> population, List<ItemRestResponse> prices) {
+    private Mono<VerifiedCoupon> getMaxFitness(List<Chromosome> population, List<ItemRestResponse> prices) {
         return Flux.fromIterable(population)
                 .sort((c1, c2) -> Double.compare(c2.getFitness(), c1.getFitness()))
                 .reduce(Chromosome::maxCromosome)
@@ -62,7 +62,7 @@ public class GeneticService {
 
                     Double total = pricesResponse.stream().map(ItemRestResponse::getPrice).reduce(0.0, Double::sum);
                     List<String> ids = pricesResponse.stream().map(ItemRestResponse::getId).toList();
-                    return new CouponResponse(ids, total);
+                    return new VerifiedCoupon(ids, total);
                 });
     }
 }

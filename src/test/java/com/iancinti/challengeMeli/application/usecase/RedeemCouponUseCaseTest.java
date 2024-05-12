@@ -4,8 +4,8 @@ import com.iancinti.challengeMeli.coupon.adapter.out.webflux.model.ItemRestRespo
 import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
 import com.iancinti.challengeMeli.coupon.application.port.out.SaveItemRepository;
 import com.iancinti.challengeMeli.coupon.application.usecase.RedeemCouponUseCase;
-import com.iancinti.challengeMeli.coupon.domain.CouponRequest;
-import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.domain.Coupon;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 import com.iancinti.challengeMeli.genetic.GeneticService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class RedeemCouponUseCaseTest {
     @Test
     void testExecute() {
 
-        CouponRequest request = new CouponRequest(Arrays.asList("item1", "item2", "item3"), 100);
+        Coupon request = new Coupon(Arrays.asList("item1", "item2", "item3"), 100);
         ItemRestResponse item1Response = new ItemRestResponse("item1", 50.0);
         ItemRestResponse item2Response = new ItemRestResponse("item2", 30.0);
         ItemRestResponse item3Response = new ItemRestResponse("item3", 20.0);
@@ -48,8 +48,8 @@ class RedeemCouponUseCaseTest {
         when(redeemCouponRepository.execute("item2")).thenReturn(Mono.just(item2Response));
         when(redeemCouponRepository.execute("item3")).thenReturn(Mono.just(item3Response));
 
-        Mono<CouponResponse> resultMono = redeemCouponUseCase.execute(request);
-        CouponResponse result = resultMono.block();
+        Mono<VerifiedCoupon> resultMono = redeemCouponUseCase.execute(request);
+        VerifiedCoupon result = resultMono.block();
 
         assertEquals(100.0, result.getTotal());
         assertEquals(Arrays.asList("item1", "item2", "item3"), result.getItems());
@@ -63,10 +63,10 @@ class RedeemCouponUseCaseTest {
 
         MockitoAnnotations.openMocks(this);
         RedeemCouponUseCase useCase = new RedeemCouponUseCase(redeemCouponRepository, geneticService,saveItemRepository);
-        CouponRequest request = new CouponRequest(Collections.emptyList(), 100);
+        Coupon request = new Coupon(Collections.emptyList(), 100);
 
-        Mono<CouponResponse> resultMono = useCase.execute(request);
-        CouponResponse result = resultMono.block();
+        Mono<VerifiedCoupon> resultMono = useCase.execute(request);
+        VerifiedCoupon result = resultMono.block();
 
         if (result != null) {
             assertEquals(0.0, result.getTotal());

@@ -1,8 +1,9 @@
 package com.iancinti.challengeMeli.coupon.adapter.out.redis;
 
 import com.iancinti.challengeMeli.coupon.adapter.out.redis.model.ItemRedis;
+import com.iancinti.challengeMeli.coupon.adapter.out.redis.model.RedisRepository;
 import com.iancinti.challengeMeli.coupon.application.port.out.SaveItemRepository;
-import com.iancinti.challengeMeli.coupon.domain.CouponResponse;
+import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +20,9 @@ public class SaveItemRedisAdapter implements SaveItemRepository {
     }
 
     @Override
-    public void execute(CouponResponse couponResponse){
+    public void execute(VerifiedCoupon verifiedCoupon){
 
-        couponResponse.getItems().forEach( item -> {
+        verifiedCoupon.getItems().forEach(item -> {
 
             Optional<ItemRedis> resp = redisRepository.findById(item);
 
