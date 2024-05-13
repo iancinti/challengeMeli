@@ -2,16 +2,20 @@
 
 ##### Proseso de ejecucion local para pruebas:
 
-1- Construimos imagen desde el directorio raiz con el siguiente comando:
+1- Agregar al directorio raiz el archivo .env la siguiente variable con el valor del servicio de meli:
+
+    MELI_SERVICE
+
+2- Construimos imagen desde el directorio raiz con el siguiente comando:
 
     sudo docker compose build
 
-2- Levantamos la imagen: 
+3- Levantamos la imagen: 
 
     sudo docker compose up
 
 
-3- El contenedor expone el servico a:
+4- El contenedor expone el servico a:
 
          localhost:8080/coupon
 
