@@ -1,5 +1,6 @@
 package com.iancinti.challengeMeli.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -11,6 +12,10 @@ import java.time.Duration;
 
 @Configuration
 public class WebConfig {
+
+
+    @Value("${spring.service.meli}")
+    private String MELI_URL;
 
     @Bean
     public WebClient webClient() {
@@ -27,7 +32,7 @@ public class WebConfig {
 
         return WebClient.builder()
                 .clientConnector(connector)
-                .baseUrl("")
+                .baseUrl(MELI_URL)
                 .build();
     }
 }
