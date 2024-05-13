@@ -18,8 +18,13 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive"){
+		exclude("org.codehaus.groovy", "groovy")
+	}
 	testImplementation("io.projectreactor:reactor-test")
+}
+tasks.bootJar {
+	archiveFileName.set("app.jar")
 }
 
 tasks.withType<Test> {

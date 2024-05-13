@@ -1,8 +1,16 @@
+FROM gradle:latest as builder
+
+WORKDIR /app
+
+COPY --chown=gradle:gradle . /app
+
+RUN gradle clean bootJar
+
 FROM openjdk:17
 
 WORKDIR /app
 
-COPY build/libs/challengeMeli-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/build/libs/app.jar app.jar
 
 EXPOSE 8080
 
