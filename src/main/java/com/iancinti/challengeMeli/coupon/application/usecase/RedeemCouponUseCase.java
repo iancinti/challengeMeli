@@ -1,7 +1,7 @@
 package com.iancinti.challengeMeli.coupon.application.usecase;
 
 import com.iancinti.challengeMeli.coupon.application.port.in.RedeemCouponCommand;
-import com.iancinti.challengeMeli.coupon.application.port.out.RedeemCouponRepository;
+import com.iancinti.challengeMeli.coupon.application.port.out.GetItemByIdRepository;
 import com.iancinti.challengeMeli.coupon.application.port.out.SaveItemRepository;
 import com.iancinti.challengeMeli.coupon.domain.Coupon;
 import com.iancinti.challengeMeli.coupon.domain.VerifiedCoupon;
@@ -17,13 +17,13 @@ import java.util.Collections;
 @Component
 public class RedeemCouponUseCase implements RedeemCouponCommand {
 
-    private final RedeemCouponRepository redeemCouponRepository;
+    private final GetItemByIdRepository getItemByIdRepository;
     private final GeneticService geneticService;
     private final SaveItemRepository saveItemRepository;
 
     @Autowired
-    public RedeemCouponUseCase(RedeemCouponRepository redeemCouponRepository, GeneticService geneticService, SaveItemRepository saveItemRepository) {
-        this.redeemCouponRepository = redeemCouponRepository;
+    public RedeemCouponUseCase(GetItemByIdRepository getItemByIdRepository, GeneticService geneticService, SaveItemRepository saveItemRepository) {
+        this.getItemByIdRepository = getItemByIdRepository;
         this.geneticService = geneticService;
         this.saveItemRepository = saveItemRepository;
     }
@@ -34,7 +34,7 @@ public class RedeemCouponUseCase implements RedeemCouponCommand {
             return Mono.just(new VerifiedCoupon(Collections.emptyList(), 0.0));
         } else {
             return Flux.fromIterable(coupon.getItems())
-                    .flatMap(redeemCouponRepository::execute)
+                    .flatMap(getItemByIdRepository::execute)
                     .collectList()
                     .flatMap(items ->
                             geneticService.generate(50, 5, 0.05, items, items.size(), coupon.getAmount())

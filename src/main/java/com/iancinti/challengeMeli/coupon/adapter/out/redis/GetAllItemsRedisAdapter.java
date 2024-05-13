@@ -32,7 +32,7 @@ public class GetAllItemsRedisAdapter implements GetAllItemsRepository {
                         .sorted(Comparator.comparing(ItemRedis::getCount))
                         .limit(5)
                         .map(ItemRedis::getId)
-                        .toList().reversed(),
+                        .toList(),
                 null
         );
     }
