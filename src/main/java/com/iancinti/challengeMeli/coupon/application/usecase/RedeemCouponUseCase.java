@@ -39,7 +39,7 @@ public class RedeemCouponUseCase implements RedeemCouponCommand {
             logger.warn("Cupón vacío proporcionado");
             return Mono.just(new VerifiedCoupon(Collections.emptyList(), 0.0));
         } else {
-            return Flux.fromIterable(coupon.getItems())
+            return Flux.fromIterable(coupon.getItems().stream().distinct().toList())
                     .flatMap(getItemByIdRepository::execute)
                     .collectList()
                     .flatMap(items ->
